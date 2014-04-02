@@ -17,20 +17,21 @@ else
 fi
 
 #create directory
-sudo mkdir /opt/popcorn-time
-sudo chmod 777 -R /opt/popcorn-time
+sudo mkdir /opt/Popcorn-Time
+sudo chmod 777 -R /opt/Popcorn-Time
 
 #move script inside the directory
-cd /opt/popcorn-time
+cd /opt/Popcorn-Time
 
 #download popcorn-time
-wget $URL/Popcorn-Time-"$VERSION"-Linux-"$ARCH".tar.gz -O /opt/popcorn-time/Popcorn-Time.tar.gz
-
-#download icon
-wget $URL/popcorntime.png -O /opt/popcorn-time/popcorntime.png
+wget $URL/Popcorn-Time-"$VERSION"-Linux-"$ARCH".tar.gz -O /opt/Popcorn-Time/Popcorn-Time.tar.gz
 
 #extract archive
-tar -xf Popcorn-Time.tar.gz && rm Popcorn-Time.tar.gz
+tar -xf Popcorn-Time.tar.gz 
+#install icon
+sudo wget https://raw.githubusercontent.com/MrVaykadji/popcorn-time/master/images/icon.png -O /opt/Popcorn-Time/popcorntime.png
+#remove downloaded archive
+sudo rm Popcorn-Time.tar.gz
 
 #install
 echo "[Desktop Entry]
@@ -51,13 +52,14 @@ Exec=killall Popcorn-Time
 OnlyShowIn=Unity;" | sudo tee /usr/share/applications/popcorn-time.desktop
 sudo chmod +x /usr/share/applications/popcorn-time.desktop
 
-sudo ln -s /opt/popcorn-time/Popcorn-Time /usr/bin/popcorn-time
-sudo cp /opt/popcorn-time/popcorntime.png /usr/share/pixmaps/popcorntime.png
+#create symlinc for commandline launch
+sudo ln -s /opt/Popcorn-Time/Popcorn-Time /usr/bin/popcorn-time
+sudo cp /opt/Popcorn-Time/popcorntime.png /usr/share/pixmaps/popcorntime.png
 
 #create uninstall script
 echo "#!/bin/bash
 sudo rm /usr/bin/popcorn-time
 sudo rm /usr/share/applications/popcorn-time.desktop
 sudo rm /usr/share/pixmaps/popcorntime.png
-sudo rm -r /opt/popcorn-time" | sudo tee /opt/popcorn-time/uninstall
-sudo chmod +x /opt/popcorn-time/uninstall
+sudo rm -r /opt/Popcorn-Time" | sudo tee /opt/Popcorn-Time/uninstall
+sudo chmod +x /opt/Popcorn-Time/uninstall
