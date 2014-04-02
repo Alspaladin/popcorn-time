@@ -2,13 +2,13 @@
 Personnal Popcorn-Time repo
 
 
-### Install a release : 
+### Install a release with automated script : 
 
     wget https://raw.githubusercontent.com/MrVaykadji/popcorn-time/master/install-release -O install-popcorn
     bash install-popcorn
     rm install-popcorn
     
-### Build from sources : 
+### Build from sources with automated script : 
 
     wget https://raw.githubusercontent.com/MrVaykadji/popcorn-time/master/popcorn-build
     bash popcorn-build
