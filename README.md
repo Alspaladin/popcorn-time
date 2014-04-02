@@ -1,6 +1,8 @@
 #Popcorn time
 Personnal Popcorn-Time repo
 
+*This is not a fork where you'll find commits and new features : I'm not a developer. This serves as a backup for precious sources. I will update it when new releases that work come from other github repo's.*
+
 
 ### Install a release with automated script : 
 
