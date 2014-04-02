@@ -1,0 +1,63 @@
+#!/bin/bash
+#popcorn-time installer
+
+#version
+VERSION="0.2.8"
+URL="https://github.com/MrVaykadji/popcorn-time/releases/download/0.2.8-RC1"
+
+#architecture?
+if [ -n "`arch | grep 64`" ] ; then
+    #64bits
+    ARCH=64
+    sudo ln -s /lib/x86_64-linux-gnu/libudev.so.1 /lib/x86_64-linux-gnu/libudev.so.0
+else
+    #32bits
+    ARCH=32
+    sudo ln -s /lib/i386-linux-gnu/libudev.so.1 /lib/i386-linux-gnu/libudev.so.0
+fi
+
+#create directory
+sudo mkdir /opt/popcorn-time
+sudo chmod 777 -R /opt/popcorn-time
+
+#move script inside the directory
+cd /opt/popcorn-time
+
+#download popcorn-time
+wget $URL/Popcorn-Time-"$VERSION"-Linux-"$ARCH".tar.gz -O /opt/popcorn-time/Popcorn-Time.tar.gz
+
+#download icon
+wget $URL/popcorntime.png -O /opt/popcorn-time/popcorntime.png
+
+#extract archive
+tar -xf Popcorn-Time.tar.gz && rm Popcorn-Time.tar.gz
+
+#install
+echo "[Desktop Entry]
+Comment=Watch movies in streaming through P2P and Torrent.
+Comment[fr]=Regarder des films en streaming via P2P et Torrent.
+Name=Popcorn Time
+Exec=/usr/bin/popcorn-time
+StartupNotify=false
+Type=Application
+Icon=popcorntime
+Keywords=Streaming;Film;P2P;Torrent;Movie;Cinema
+Actions=Kill;
+
+[Desktop Action Kill]
+Name=Force close
+Name[fr]=Forcer la fermeture
+Exec=killall Popcorn-Time
+OnlyShowIn=Unity;" | sudo tee /usr/share/applications/popcorn-time.desktop
+sudo chmod +x /usr/share/applications/popcorn-time.desktop
+
+sudo ln -s /opt/popcorn-time/Popcorn-Time /usr/bin/popcorn-time
+sudo cp /opt/popcorn-time/popcorntime.png /usr/share/pixmaps/popcorntime.png
+
+#create uninstall script
+echo "#!/bin/bash
+sudo rm /usr/bin/popcorn-time
+sudo rm /usr/share/applications/popcorn-time.desktop
+sudo rm /usr/share/pixmaps/popcorntime.png
+sudo rm -r /opt/popcorn-time" | sudo tee /opt/popcorn-time/uninstall
+sudo chmod +x /opt/popcorn-time/uninstall
