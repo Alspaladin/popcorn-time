@@ -1,11 +1,9 @@
 #!/bin/bash
-# Script author: MrVaykadji http://askubuntu.com/users/176689/mrvaykadji
+# Script author: MrVaykadji
 # Changes made by Andrew <andrew@webupd8.org>:
-#  - use the NodeJS PPA to avoid build failure with grunt-cli
 #  - use the Popcorn Time icon
 #  - added check for apt, dpkg, etc.
 #  - added some checks when creating symbolic links
-#  - added video playback work-around for Ubuntu 32bit
 #  - latest GIT requires ruby-compass
 #  - build app CSS with ruby compass and place it in the correct folder
 #  - it's no longer needed to replace the package.json file
@@ -141,6 +139,6 @@ Installation done ! Popcorn-time should be now available through :
 - Commandline 'popcorn-time'"
 
 read -p "Clean all created directories and temporary files created by the build-process (y/n)? "
-[ "$REPLY" == "y" ] && cd .. && sudo rm -r popcorn-time tmp
+[ "$REPLY" == "y" ] && cd .. && sudo rm -rf popcorn-time tmp
 
 exit 0
